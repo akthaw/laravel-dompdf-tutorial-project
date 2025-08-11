@@ -28,7 +28,8 @@ Before you begin, ensure you have the following installed on your local machine:
 First, create a fresh Laravel application. Open your terminal and run the following commands:
 
 # Create a new project named "laravel-pdf-tutorial"
-```laravel new laravel-pdf-tutorial 
+```
+laravel new laravel-pdf-tutorial 
 ```
 
 # Navigate into the project directory
@@ -191,9 +192,11 @@ Error: Class "Barryvdh\DomPDF\Facade\Pdf" not found
 Cause: Laravel's package autoloader cache is out of date and hasn't registered the Pdf alias.
 Solution 1: Rebuild Composer's autoloader cache. This is fast and usually effective.
 
-```composer dump-autoload
+```
+composer dump-autoload
 ```
 Solution 2: Clear all of Laravel's cached configurations for a fresh start.
 
-```php artisan optimize:clear
+```
+php artisan optimize:clear
 ```
