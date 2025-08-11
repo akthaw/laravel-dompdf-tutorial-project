@@ -27,26 +27,32 @@ Before you begin, ensure you have the following installed on your local machine:
 
 First, create a fresh Laravel application. Open your terminal and run the following commands:
 
-```bash
 # Create a new project named "laravel-pdf-tutorial"
-laravel new laravel-pdf-tutorial
+```
+laravel new laravel-pdf-tutorial 
+```
 
 # Navigate into the project directory
-cd laravel-pdf-tutorial
-Step 2: Install the PDF Library
+``` 
+cd laravel-pdf-tutorial 
+```
+
+### Step 2: Install the PDF Library
 Install the barryvdh/laravel-dompdf package using Composer. This package is a widely-used wrapper that makes the DomPDF library easy to use in Laravel.
 
 In your terminal, run:
+```
+composer require barryvdh/laravel-dompdf 
+```
 
-bash
-composer require barryvdh/laravel-dompdf
 Note: Modern Laravel versions use Package Auto-Discovery, so the package should be ready to use immediately without any manual setup in config/app.php.
 
-Step 3: Define the Route
+### Step 3: Define the Route
 Define a URL that will trigger the PDF generation. This route will point to a method in our controller.
 
 Open the routes file at routes/web.php and add the following:
 
+```
 php
 <?php
 
@@ -58,18 +64,22 @@ Route::get('/', function () {
 });
 
 // 👇 Define the new route for PDF generation
-Route::get('/generate-pdf', [PDFController::class, 'generatePDF']);
-Step 4: Create the Controller Logic
+Route::get('/generate-pdf', [PDFController::class, 'generatePDF']); 
+```
+
+### Step 4: Create the Controller Logic
 The controller will handle the business logic: preparing data and telling DomPDF to generate the document.
 
 4.1. Generate the Controller File
 Use the following Artisan command to create a new controller:
 
-bash
+```
 php artisan make:controller PDFController
+```
+
 4.2. Add the Generation Logic
 Open the new file at app/Http/Controllers/PDFController.php and add the generatePDF method.
-
+```
 php
 <?php
 
@@ -101,7 +111,9 @@ class PDFController extends Controller
         return $pdf->download('invoice-1234.pdf');
     }
 }
-Step 5: Design the PDF Template
+```
+
+### Step 5: Design the PDF Template
 This Blade view is the HTML and CSS template for your PDF.
 
 5.1. Create the View File
@@ -109,7 +121,7 @@ Create a new file at resources/views/myPDF.blade.php.
 
 5.2. Add the HTML and CSS
 Paste the following code into your myPDF.blade.php file. You can style this just like a regular web page.
-
+```
 html
 <!DOCTYPE html>
 <html>
@@ -155,13 +167,16 @@ html
     </div>
 </body>
 </html>
-Step 6: Test Your Application
+```
+
+### Step 6: Test Your Application
 ✅ Everything is now in place!
 
 Start the Laravel development server from your terminal:
 
-bash
+```
 php artisan serve
+```
 Open your web browser and navigate to the following URL:
 http://127.0.0.1:8000/generate-pdf
 
@@ -176,8 +191,12 @@ Solution: Make sure you've added use App\Http\Controllers\PDFController; at the 
 Error: Class "Barryvdh\DomPDF\Facade\Pdf" not found
 Cause: Laravel's package autoloader cache is out of date and hasn't registered the Pdf alias.
 Solution 1: Rebuild Composer's autoloader cache. This is fast and usually effective.
-bash
+
+```
 composer dump-autoload
+```
 Solution 2: Clear all of Laravel's cached configurations for a fresh start.
-bash
+
+```
 php artisan optimize:clear
+```
